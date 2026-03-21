@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import Image from "next/image";
 import TopMenu from "@/components/TopMenu";
 import Footer from "@/components/Footer";
 import { getCoop } from "@/libs/getCoop";
@@ -20,8 +21,14 @@ export default async function CoopPage({
       <TopMenu isLoggedIn={!!session} userName={session?.user?.name ?? ""} />
 
       {/* Hero Image */}
-      <div className={styles.hero}>
-        <img src={coop.imageUrl} alt={coop.name} className={styles.heroImg} />
+      <div className={styles.hero} style={{ position: "relative", width: "100%", height: "400px" }}>
+        <Image
+          src={coop.imageUrl}
+          alt={coop.name}
+          fill={true}
+          className={styles.heroImg}
+          style={{ objectFit: "cover" }}
+        />
       </div>
 
       <div className={styles.content}>

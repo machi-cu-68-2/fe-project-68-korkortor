@@ -18,6 +18,13 @@ interface BackendCoWork {
   district: string;
   province: string;
   postalcode: string;
+  picture?: string;
+}
+
+function toDriveUrl(url: string): string {
+  const match = url.match(/\/file\/d\/([^/]+)/);
+  if (match) return `https://drive.google.com/uc?id=${match[1]}`;
+  return url;
 }
 
 function mapCoWork(c: BackendCoWork): Coop {
@@ -28,7 +35,7 @@ function mapCoWork(c: BackendCoWork): Coop {
     openTime: c.opentime,
     closeTime: c.closetime,
     address: `${c.address} ${c.district} ${c.province} ${c.postalcode}`,
-    imageUrl: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&q=80",
+    imageUrl: c.picture ? toDriveUrl(c.picture) : "/img/placeholder.jpg",
   };
 }
 

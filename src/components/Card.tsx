@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./card.module.css";
 import { Coop } from "@/libs/getCoops";
 
@@ -9,12 +10,15 @@ interface CardProps {
 export default function Card({ coop }: CardProps) {
   return (
     <Link href={`/coop/${coop.id}`} className={styles.card}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        className={styles.cardImg}
-        src={coop.imageUrl}
-        alt={coop.name}
-      />
+      <div style={{ position: "relative", width: "100%", height: "200px" }}>
+        <Image
+          src={coop.imageUrl}
+          alt={coop.name}
+          fill={true}
+          className={styles.cardImg}
+          style={{ objectFit: "cover" }}
+        />
+      </div>
       <div className={styles.cardBody}>
         <h3 className={styles.cardName}>{coop.name}</h3>
         <div className={styles.metaList}>

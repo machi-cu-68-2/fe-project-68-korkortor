@@ -2,7 +2,14 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import styles from "./ReservationList.module.css";
+
+function toDriveUrl(url: string): string {
+  const match = url.match(/\/file\/d\/([^/]+)/);
+  if (match) return `https://drive.google.com/uc?id=${match[1]}`;
+  return url;
+}
 
 interface Reservation {
   _id: string;
@@ -18,6 +25,7 @@ interface Reservation {
     tel?: string;
     opentime: string;
     closetime: string;
+    picture?: string;
   };
 }
 
@@ -60,12 +68,15 @@ export default function ReservationList({ reservations, token }: Props) {
     <div className={styles.grid}>
       {activeReservations.map((r) => (
         <div key={r._id} className={styles.card}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className={styles.cardImg}
-            src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&q=80"
-            alt={r.cowork.name}
-          />
+          <div style={{ position: "relative", width: "100%", height: "200px" }}>
+            <Image
+              src={r.cowork.picture ? toDriveUrl(r.cowork.picture) : "/img/placeholder.jpg"}
+              alt={r.cowork.name}
+              fill={true}
+              className={styles.cardImg}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
           <div className={styles.cardBody}>
             <h3 className={styles.cardName}>{r.cowork.name}</h3>
             <p className={styles.cardDate}>

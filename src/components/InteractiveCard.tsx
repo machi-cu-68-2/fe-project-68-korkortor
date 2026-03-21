@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./card.module.css";
 import { Coop } from "@/libs/getCoops";
 
@@ -26,8 +27,15 @@ export default function InteractiveCard({ venue }: InteractiveCardProps) {
         transition: "transform 0.2s, box-shadow 0.2s",
       }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={styles.cardImg} src={venue.imageUrl} alt={venue.name} />
+      <div style={{ position: "relative", width: "100%", height: "200px" }}>
+        <Image
+          src={venue.imageUrl}
+          alt={venue.name}
+          fill={true}
+          className={styles.cardImg}
+          style={{ objectFit: "cover" }}
+        />
+      </div>
       <div className={styles.cardBody}>
         <h3 className={styles.cardName}>{venue.name}</h3>
         <div className={styles.metaList}>
