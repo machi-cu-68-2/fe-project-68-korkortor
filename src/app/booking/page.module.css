@@ -1,0 +1,23 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+  padding: 40px;
+}
+
+.title {
+  font-family: "Lexend", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0f2233;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--gray);
+  font-size: 0.95rem;
+}

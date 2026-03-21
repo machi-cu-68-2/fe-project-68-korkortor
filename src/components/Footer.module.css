@@ -1,0 +1,19 @@
+.footer {
+  background: #0f2233;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 28px 40px;
+}
+
+.logo {
+  font-family: "Lexend", sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.copy {
+  font-size: 0.8rem;
+}
