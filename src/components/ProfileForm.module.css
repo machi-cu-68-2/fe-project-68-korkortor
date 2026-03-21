@@ -1,0 +1,75 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.heading {
+  font-family: "Lexend", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f2233;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #1a6b55;
+}
+
+.input {
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #1a6b55;
+}
+
+.btnSave {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1a6b55;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 8px;
+}
+
+.btnSave:hover {
+  background-color: #145a47;
+}
+
+.btnSave:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.success {
+  color: #1a6b55;
+  font-size: 0.875rem;
+  background: #e8f5f0;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 0.875rem;
+  background: #fef2f2;
+  padding: 8px 12px;
+  border-radius: 6px;
+}

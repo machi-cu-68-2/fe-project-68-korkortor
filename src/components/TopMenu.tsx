@@ -20,7 +20,7 @@ export default function TopMenu({ isLoggedIn, userName }: TopMenuProps) {
           <>
             <TopMenuItem title="My Reservation" pageRef="/booking" />
             <li>
-              <div className={styles.userIcon} title={userName}>
+              <Link href="/profile" className={styles.userIcon} title={userName}>
                 <svg
                   width="18"
                   height="18"
@@ -32,7 +32,7 @@ export default function TopMenu({ isLoggedIn, userName }: TopMenuProps) {
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
                 </svg>
-              </div>
+              </Link>
             </li>
           </>
         ) : (
