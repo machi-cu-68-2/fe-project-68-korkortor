@@ -1,0 +1,71 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.cardImg {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.cardBody {
+  padding: 16px;
+}
+
+.cardName {
+  font-family: "Lexend", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f2233;
+  margin-bottom: 6px;
+}
+
+.cardDate {
+  color: #1a6b55;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.btnCancel {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #e74c3c;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btnCancel:hover {
+  background-color: #c0392b;
+}
+
+.btnCancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.empty {
+  color: #666;
+  font-size: 1rem;
+  text-align: center;
+  padding: 60px 0;
+}

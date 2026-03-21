@@ -1,3 +1,5 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import TopMenu from "@/components/TopMenu";
 import Footer from "@/components/Footer";
 import { getCoop } from "@/libs/getCoop";
@@ -7,13 +9,15 @@ import styles from "./page.module.css";
 export default async function CoopPage({
   params,
 }: {
-  params: { cid: string };
+  params: Promise<{ cid: string }>;
 }) {
-  const coop = await getCoop(params.cid);
+  const { cid } = await params;
+  const session = await getServerSession(authOptions);
+  const coop = await getCoop(cid);
 
   return (
     <div className={styles.page}>
-      <TopMenu isLoggedIn={false} />
+      <TopMenu isLoggedIn={!!session} userName={session?.user?.name ?? ""} />
 
       {/* Hero Image */}
       <div className={styles.hero}>
@@ -52,7 +56,11 @@ export default async function CoopPage({
         </div>
 
         {/* Booking Form */}
-        <BookingForm coopId={params.cid} coopName={coop.name} />
+        <BookingForm
+          coopId={cid}
+          coopName={coop.name}
+          token={(session?.user as any)?.accessToken ?? ""}
+        />
       </div>
 
       <Footer />

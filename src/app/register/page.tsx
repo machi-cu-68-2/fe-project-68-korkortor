@@ -28,9 +28,23 @@ export default function RegisterPage() {
     setLoading(true);
     setError("");
 
-    // Mock registration — replace with real API call:
-    // await fetch("/api/register", { method: "POST", body: JSON.stringify(form) });
-    await new Promise((r) => setTimeout(r, 800));
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: form.name,
+        email: form.email,
+        password: form.password,
+        tel: form.tel,
+      }),
+    });
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => null);
+      setError(data?.message || "Registration failed. Please try again.");
+      setLoading(false);
+      return;
+    }
 
     setLoading(false);
     router.push("/login");

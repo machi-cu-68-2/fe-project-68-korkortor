@@ -6,7 +6,17 @@
 
 .main {
   flex: 1;
-  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 40px 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
 }
 
 .title {
@@ -14,10 +24,13 @@
   font-size: 1.8rem;
   font-weight: 700;
   color: #0f2233;
-  margin-bottom: 8px;
 }
 
-.subtitle {
-  color: var(--gray);
-  font-size: 0.95rem;
+.badge {
+  background-color: #1a6b55;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 20px;
 }

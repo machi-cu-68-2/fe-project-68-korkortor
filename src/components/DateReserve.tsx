@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import styles from "./DateReserve.module.css";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs, { Dayjs } from "dayjs";
 
 interface DateReserveProps {
   onDateChange: (date: string) => void;
@@ -10,15 +12,29 @@ interface DateReserveProps {
 
 export default function DateReserve({ onDateChange, value }: DateReserveProps) {
   return (
-    <div className={styles.field}>
-      <label className={styles.label}>Date</label>
-      <input
-        type="date"
-        className={styles.input}
-        value={value}
-        min={new Date().toISOString().split("T")[0]}
-        onChange={(e) => onDateChange(e.target.value)}
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DatePicker
+        label="Date"
+        value={value ? dayjs(value) : null}
+        minDate={dayjs()}
+        onChange={(newValue: Dayjs | null) => {
+          if (newValue) {
+            onDateChange(newValue.format("YYYY-MM-DD"));
+          }
+        }}
+        sx={{
+          width: "100%",
+          marginBottom: "16px",
+          "& .MuiOutlinedInput-root": {
+            "&.Mui-focused fieldset": {
+              borderColor: "#1a6b55",
+            },
+          },
+          "& .MuiInputLabel-root.Mui-focused": {
+            color: "#1a6b55",
+          },
+        }}
       />
-    </div>
+    </LocalizationProvider>
   );
 }

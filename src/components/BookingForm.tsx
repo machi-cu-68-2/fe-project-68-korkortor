@@ -1,27 +1,54 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import DateReserve from "./DateReserve";
 import styles from "./BookingForm.module.css";
 
 interface BookingFormProps {
   coopId: string;
   coopName: string;
+  token: string;
 }
 
-export default function BookingForm({ coopId, coopName }: BookingFormProps) {
+export default function BookingForm({ coopId, coopName, token }: BookingFormProps) {
+  const router = useRouter();
   const [date, setDate] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleReserve = () => {
-    if (!date) return alert("Please select a date.");
+  const handleReserve = async () => {
+    if (!date) return setError("Please select a date.");
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+
     setLoading(true);
-    // Mock submission — replace with real API call
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 800);
+    setError("");
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/coworks/${coopId}/reservations`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ reserveDate: new Date(date).toISOString() }),
+      }
+    );
+
+    setLoading(false);
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => null);
+      setError(data?.message || "Failed to reserve. You can have at most 3 active reservations.");
+      return;
+    }
+
+    setSubmitted(true);
   };
 
   if (submitted) {
@@ -46,6 +73,7 @@ export default function BookingForm({ coopId, coopName }: BookingFormProps) {
   return (
     <div className={styles.card}>
       <h2 className={styles.title}>Reservation</h2>
+      {error && <p style={{ color: "red", fontSize: "0.875rem", marginBottom: "0.5rem" }}>{error}</p>}
       <DateReserve value={date} onDateChange={setDate} />
       <button
         className={styles.btnReserve}
